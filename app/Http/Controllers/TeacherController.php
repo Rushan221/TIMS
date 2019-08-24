@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Department;
+use App\Subject;
+use App\Teacher;
 use Illuminate\Http\Request;
 
 class TeacherController extends Controller
@@ -13,7 +16,9 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        //
+        $title = 'Teachers';
+        $teachers = Teacher::all();
+        return view('admin.teachers.index', compact('title', 'teachers'));
     }
 
     /**
@@ -22,8 +27,12 @@ class TeacherController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    {   
+        $departments = Department::all();
+        $subjects = Subject::all();
+        $title = 'Add Teacher';
+        return view('admin.teachers.create', compact('title','departments','subjects'));
+
     }
 
     /**
@@ -34,7 +43,19 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'name'=>'required|min:3',
+            'contact'=>'required|min:11|numeric',
+            'email_address'=>'email',
+            'address'=>'required',
+            'department_id'=>'required',
+            'subject_id'=>'required'
+        ];
+
+        $request->validate($rules);
+        Teacher::create($request);
+
+        return redirect(route('admin.teachers.index'));
     }
 
     /**
