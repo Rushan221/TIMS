@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Subject;
 use Illuminate\Http\Request;
 
 class SubjectController extends Controller
@@ -12,8 +13,10 @@ class SubjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {   
+        $title = 'Subjects';
+        $subjects = Subject::all();
+        return view('admin.subjects.index', compact('subjects','title'));
     }
 
     /**
