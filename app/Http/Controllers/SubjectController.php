@@ -26,7 +26,8 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Add Subject';
+        return view('admin.subjects.create',compact('title'));
     }
 
     /**
@@ -37,7 +38,17 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules=[
+            'name'=>"required|min:3",
+            'code'=>"required"
+        ];
+        $request->validate($rules);
+
+            Subject::create([
+            'name'=>$request->name,
+            'code'=>$request->code
+        ]);
+        return redirect(route('admin.subjects.index'));
     }
 
     /**
@@ -59,7 +70,10 @@ class SubjectController extends Controller
      */
     public function edit($id)
     {
-        //
+        $title = 'Edit Subject';
+        $subject = Subject::whereId($id)->first();
+
+        return view('admin.subjects.edit',compact('subject','title'));
     }
 
     /**
@@ -71,7 +85,17 @@ class SubjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules=[
+            'name'=>"required|min:3",
+            'code'=>"required"
+        ];
+        $request->validate($rules);
+        
+        Subject::whereId($id)->update([
+            'name'=>$request->name,
+            'code'=>$request->code
+        ]);
+        return redirect(route('admin.subjects.index'));
     }
 
     /**
@@ -81,7 +105,8 @@ class SubjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    {   
+        Subject::whereId($id)->delete();
+        return redirect(route('admin.subjects.index'));
     }
 }

@@ -26,7 +26,7 @@
                                 <form action="{{ route('admin.departments.destroy',$department->id) }}" method="post">
                                     @method('Delete')
                                     @csrf
-                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="confirm('Are you sure you want to delete?')">Delete</button>
                                 </form>
                             </div>
                         </td>
