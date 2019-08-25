@@ -22,14 +22,65 @@
     {{-- icons --}}
     <script src="https://kit.fontawesome.com/51b78c2475.js"></script>
 
+    <style>
+        /* The side navigation menu */
+        .sidebar {
+        margin: 0;
+        padding: 0;
+        width: 200px;
+        background-color: #f1f1f1;
+        position: fixed;
+        z-index: 1;
+        height: 100%;
+        overflow: auto;
+        }
+
+        /* Sidebar links */
+        .sidebar a {
+        display: block;
+        color: black;
+        padding: 16px;
+        text-decoration: none;
+        }
+
+        /* Active/current link */
+        .sidebar a.active {
+        background-color: #367698;
+        color: white;
+        }
+
+        /* Links on mouse-over */
+        .sidebar a:hover:not(.active) {
+        background-color: #555;
+        color: white;
+        }
+
+        /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+        div.content {
+        margin-left: 200px;
+        padding: 1px 16px;
+        height: 1000px;
+        }
+
+        /* On screens that are less than 700px wide, make the sidebar into a topbar */
+        @media screen and (max-width: 800px) {
+        .sidebar {
+            width: 100%;
+            height: auto;
+            position: relative;
+        }
+        .sidebar a {float: left;}
+        div.content {margin-left: 0;}
+        }
+    </style>
+
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top">
+                <a class="navbar-brand" href="{{ url('/') }}">TIMS</a>
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/home') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
+                
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -37,15 +88,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.departments.index') }}">Departments</a>                 
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.subjects.index') }}">Subjects</a>                 
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.teachers.index') }}">Teachers</a>                 
-                        </li>
+                        
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -85,9 +128,20 @@
             </div>
         </nav>
 
-        <main class="py-4 container">
-            @yield('content')
-        </main>
+        <!-- The sidebar -->
+        <div class="sidebar">                      
+            <a class="active" href="{{ url('/home') }}">Dashboard</a>
+            <a href="{{ route('admin.departments.index') }}">Departments</a>
+            <a href="{{ route('admin.subjects.index') }}">Subjects</a>
+            <a href="{{ route('admin.teachers.index') }}">Teachers</a>
+        </div>
+      
+      
+        <div class="content">
+            <main class="py-4 container">
+                @yield('content')
+            </main>
+        </div>
     </div>
 </body>
 </html>

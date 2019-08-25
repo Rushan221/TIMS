@@ -53,7 +53,10 @@ class TeacherController extends Controller
         ];
 
         $request->validate($rules);
-        Teacher::create($request);
+        
+        Teacher::create([
+
+        ]);
 
         return redirect(route('admin.teachers.index'));
     }
