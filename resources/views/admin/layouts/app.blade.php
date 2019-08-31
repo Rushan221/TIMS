@@ -10,8 +10,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
+    <script src="{{ asset('js/app.js') }}" defer></script>    
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -21,6 +21,7 @@
 
     {{-- icons --}}
     <script src="https://kit.fontawesome.com/51b78c2475.js"></script>
+
 
     <style>
         /* The side navigation menu */
@@ -62,17 +63,6 @@
         height: 1000px;
         }
 
-        .alert{
-        z-index: 99;
-        top: 0px;
-        right:18px;
-        min-width:30%;
-        position: fixed;
-        }
-        @keyframes slide {
-            100% { top: 30px; }
-        }
-
         /* On screens that are less than 700px wide, make the sidebar into a topbar */
         @media screen and (max-width: 800px) {
         .sidebar {
@@ -84,10 +74,6 @@
         div.content {margin-left: 0;}
         }
 
-        .alert{ /* center the alert on small screens */
-        left: 10px;
-        right: 10px; 
-        }
     </style>
 
 </head>
@@ -153,28 +139,19 @@
         </div>
       
       
-        <div class="content">
-            @if (session('status'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{session('status')}} {{-- <- Display the session value --}}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            @endif
+        <div class="content">            
             <main class="py-4 container">
+                @include('admin.partials.alerts')
                 @yield('content')
             </main>
         </div>
     </div>
 
     <script>
-        //close the alert after 3 seconds.
         $(document).ready(function(){
-            setTimeout(function() {
-                $(".alert").alert('close');
-            }, 3000);
+            $('#alert-message').delay(3000).fadeOut('slow');
         });
     </script>
+
 </body>
 </html>

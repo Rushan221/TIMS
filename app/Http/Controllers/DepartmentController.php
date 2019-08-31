@@ -26,9 +26,9 @@ class DepartmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   
+    {
         $title = 'Add Department';
-        return view('admin.departments.create',compact('title'));
+        return view('admin.departments.create', compact('title'));
     }
 
     /**
@@ -38,18 +38,23 @@ class DepartmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
-        $rules=[
-            'name'=>"required|min:3",
-            'code'=>"required|unique:mst_departments"
+    {
+        $rules = [
+            'name' => "required|min:3",
+            'code' => "required|unique:mst_departments",
         ];
         $request->validate($rules);
 
-        Department::create([
-            'name'=>$request->name,
-            'code'=>$request->code
+        $department = Department::create([
+            'name' => $request->name,
+            'code' => $request->code,
         ]);
-        return redirect(route('admin.departments.index'));
+
+        if ($department) {
+            return redirect()->route('admin.departments.index')->with('success', 'Department have been edited successfully');
+        } else {
+            return redirect()->route('admin.departments.index')->with('warning', 'Sorry, there was some problem. Try again!');
+        }
     }
 
     /**
@@ -74,7 +79,7 @@ class DepartmentController extends Controller
         $title = 'Edit Department';
         $department = Department::whereId($id)->first();
 
-        return view('admin.departments.edit',compact('department','title'));
+        return view('admin.departments.edit', compact('department', 'title'));
     }
 
     /**
@@ -86,17 +91,21 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $rules=[
-            'name'=>"required|min:3",
-            'code'=>"required|unique:mst_departments"
+        $rules = [
+            'name' => "required|min:3",
+            'code' => "required|unique:mst_departments",
         ];
         $request->validate($rules);
-        
-        Department::whereId($id)->update([
-            'name'=>$request->name,
-            'code'=>$request->code
+
+        $department=Department::whereId($id)->update([
+            'name' => $request->name,
+            'code' => $request->code,
         ]);
-        return redirect(route('admin.departments.index'));
+        if ($department) {
+            return redirect()->route('admin.departments.index')->with('success', 'Department have been edited successfully');
+        } else {
+            return redirect()->route('admin.departments.index')->with('warning', 'Sorry, there was some problem. Try again!');
+        }
     }
 
     /**
