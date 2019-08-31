@@ -46,7 +46,7 @@ class TeacherController extends Controller
         $rules = [
             'name' => 'required|min:3',
             'contact' => 'required|min:10|numeric',
-            'email_address' => 'email',
+            'email_address' => 'email|required|unique:tbl_teachers',
             'address' => 'required',
             'department_id' => 'required',
             'subject_id' => 'required',
@@ -54,18 +54,22 @@ class TeacherController extends Controller
 
         $request->validate($rules);
         $teacherCode = 'T-' . (strtolower(str_random(5)));
-        Teacher::create([
+        $teacher = Teacher::create([
             'teacher_code' => $teacherCode,
             'name' => $request->name,
             'contact_no' => $request->contact,
             'email' => $request->email_address,
             'address' => $request->address,
-            'user_id' => 1,
+            'user_id' => null,
             'department_id' => $request->department_id,
             'subject_id' => $request->subject_id,
         ]);
 
-        return redirect(route('admin.teachers.index'));
+        if ($teacher) {
+            return redirect()->route('admin.teachers.index')->with('success', 'Teacher have been added successfully');
+        } else {
+            return redirect()->route('admin.teachers.index')->with('warning', 'Sorry, there was some problem. Try again!');
+        }
     }
 
     /**
@@ -107,14 +111,14 @@ class TeacherController extends Controller
         $rules = [
             'name' => 'required|min:3',
             'contact' => 'required|min:10|numeric',
-            'email_address' => 'email',
+            'email_address' => 'email|required|unique:tbl_teachers,id',
             'address' => 'required',
             'department_id' => 'required',
             'subject_id' => 'required',
         ];
         $request->validate($rules);
 
-        Teacher::whereId($id)->update([
+        $teacher = Teacher::whereId($id)->update([
             'name' => $request->name,
             'contact_no' => $request->contact,
             'email' => $request->email_address,
@@ -122,7 +126,12 @@ class TeacherController extends Controller
             'department_id' => $request->department_id,
             'subject_id' => $request->subject_id,
         ]);
-        return redirect()->route('admin.teachers.index');
+
+        if ($teacher) {
+            return redirect()->route('admin.teachers.index')->with('success', 'Teacher have been successfully edited');
+        } else {
+            return redirect()->route('admin.teachers.index')->with('warning', 'Sorry, there was some problem. Try again!');
+        }
 
     }
 

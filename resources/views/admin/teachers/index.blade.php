@@ -7,9 +7,9 @@
     </div>
     <div class="card-body">
         <div style="padding-bottom: 1em">
-            <a href="{{ route('admin.teachers.create') }}" class="btn btn-success"><i class="fa fa-plus"></i> Add</a>
+            <a href="{{ route('admin.teachers.create') }}" class="btn btn-success" title="Add"><i class="fa fa-plus"></i></a>
         </div>
-        <table class="table">
+        <table class="table table-striped">
             <thead>
                 <th>Name</th>
                 <th>Contact</th>
@@ -30,13 +30,21 @@
                         <td>{{ $teacher->subjects->name }}</td>
                         <td>
                             <div class="row">
-                                <a href="{{ route('admin.teachers.edit',$teacher->id) }}" class="btn btn-primary btn-sm">Edit</a>&nbsp;
+                                <a href="{{ route('admin.teachers.edit',$teacher->id) }}" class="btn btn-primary btn-sm" title="Edit"><i class="fas fa-edit"></i></a>&nbsp;
                                 <form action="{{ route('admin.teachers.destroy',$teacher->id) }}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you Sure to Proceed?');">Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you Sure to Proceed?');" title="Delete"><i class="fas fa-trash"></i></button>
+                                </form>&nbsp;
+                                <form action="{{ route('addAsUser',$teacher->id) }}" method="post"> 
+                                    @csrf 
+                                    @if ($teacher->user_id)
+                                        <button class="btn btn-default btn-sm text-success font-weight-bold" title="User Access Granted" disabled><i class="fas fa-lock-open"></i></button>
+                                    @else
+                                        <button type="submit" class="btn btn-default btn-sm text-danger font-weight-bold" title="Grant User Access" onclick="return confirm('Do you want to grant access?');"><i class="fas fa-key"></i></button>
+                                    @endif                                  
+
                                 </form>
-                                <a href="#" class="btn btn-default btn-sm" onclick="return confirm('Do you want to grant access?');"><i class="fas fa-key"></i> Grant access</a>
                             </div>
                         </td>
                     </tr>                    

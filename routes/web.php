@@ -23,6 +23,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'as' => 'admin.'], fu
 
 });
 
+Route::post('/addUser/{id}','AdminController@addAsUser')->name('addAsUser');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
