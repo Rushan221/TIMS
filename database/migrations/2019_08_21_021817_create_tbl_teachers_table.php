@@ -20,7 +20,7 @@ class CreateTblTeachersTable extends Migration
             $table->string('contact_no');
             $table->string('email');
             $table->string('address');
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('user_id')->nullable();
             $table->unsignedInteger('department_id');
             $table->unsignedInteger('subject_id');
             $table->timestamps();

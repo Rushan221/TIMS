@@ -53,7 +53,7 @@ class TeacherController extends Controller
         ];
 
         $request->validate($rules);
-        $teacherCode = 'T' . (strtolower(str_random(5)));
+        $teacherCode = 'T-' . (strtolower(str_random(5)));
         Teacher::create([
             'teacher_code' => $teacherCode,
             'name' => $request->name,
