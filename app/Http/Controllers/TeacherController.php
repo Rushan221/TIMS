@@ -46,7 +46,7 @@ class TeacherController extends Controller
         $rules = [
             'name' => 'required|min:3',
             'contact' => 'required|min:10|numeric',
-            'email_address' => 'email',
+            'email_address' => 'email|required|unique:tbl_teachers',
             'address' => 'required',
             'department_id' => 'required',
             'subject_id' => 'required',
@@ -111,7 +111,7 @@ class TeacherController extends Controller
         $rules = [
             'name' => 'required|min:3',
             'contact' => 'required|min:10|numeric',
-            'email_address' => 'email',
+            'email_address' => 'email|required|unique:tbl_teachers,id',
             'address' => 'required',
             'department_id' => 'required',
             'subject_id' => 'required',

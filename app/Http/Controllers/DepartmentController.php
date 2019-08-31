@@ -93,7 +93,7 @@ class DepartmentController extends Controller
     {
         $rules = [
             'name' => "required|min:3",
-            'code' => "required|unique:mst_departments",
+            'code' => "required|unique:mst_departments,id",
         ];
         $request->validate($rules);
 

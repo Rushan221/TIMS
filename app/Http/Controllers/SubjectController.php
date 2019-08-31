@@ -92,7 +92,7 @@ class SubjectController extends Controller
     {
         $rules = [
             'name' => "required|min:3",
-            'code' => "required|unique:mst_subjects",
+            'code' => "required|unique:mst_subjects,id",
         ];
         $request->validate($rules);
 
