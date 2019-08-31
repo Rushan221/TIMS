@@ -27,11 +27,11 @@ class TeacherController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   
+    {
         $departments = Department::all();
         $subjects = Subject::all();
         $title = 'Add Teacher';
-        return view('admin.teachers.create', compact('title','departments','subjects'));
+        return view('admin.teachers.create', compact('title', 'departments', 'subjects'));
 
     }
 
@@ -44,18 +44,25 @@ class TeacherController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'name'=>'required|min:3',
-            'contact'=>'required|min:11|numeric',
-            'email_address'=>'email',
-            'address'=>'required',
-            'department_id'=>'required',
-            'subject_id'=>'required'
+            'name' => 'required|min:3',
+            'contact' => 'required|min:10|numeric',
+            'email_address' => 'email',
+            'address' => 'required',
+            'department_id' => 'required',
+            'subject_id' => 'required',
         ];
 
         $request->validate($rules);
-        
+        $teacherCode = 'T' . (strtolower(str_random(5)));
         Teacher::create([
-
+            'teacher_code' => $teacherCode,
+            'name' => $request->name,
+            'contact_no' => $request->contact,
+            'email' => $request->email_address,
+            'address' => $request->address,
+            'user_id' => 1,
+            'department_id' => $request->department_id,
+            'subject_id' => $request->subject_id,
         ]);
 
         return redirect(route('admin.teachers.index'));
@@ -80,7 +87,12 @@ class TeacherController extends Controller
      */
     public function edit($id)
     {
-        //
+        $title = 'Edit Teacher';
+        $teacher = Teacher::whereId($id)->first();
+        $departments = Department::all();
+        $subjects = Subject::all();
+
+        return view('admin.teachers.edit', compact('title', 'teacher', 'departments', 'subjects'));
     }
 
     /**
@@ -92,7 +104,26 @@ class TeacherController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = [
+            'name' => 'required|min:3',
+            'contact' => 'required|min:10|numeric',
+            'email_address' => 'email',
+            'address' => 'required',
+            'department_id' => 'required',
+            'subject_id' => 'required',
+        ];
+        $request->validate($rules);
+
+        Teacher::whereId($id)->update([
+            'name' => $request->name,
+            'contact_no' => $request->contact,
+            'email' => $request->email_address,
+            'address' => $request->address,
+            'department_id' => $request->department_id,
+            'subject_id' => $request->subject_id,
+        ]);
+        return redirect()->route('admin.teachers.index');
+
     }
 
     /**
@@ -103,6 +134,7 @@ class TeacherController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Teacher::whereId($id)->delete();
+        return redirect(route('admin.teachers.index'));
     }
 }

@@ -16,7 +16,7 @@
                     <input type="text" class="form-control" name="name" id="name" required>
                 </div>
                 <div class="form-group">
-                    <label for="contact">Contact No.</label>
+                    <label for="contact">Mobile No.</label>
                     <div style="color: red">
                         {{ $errors->first('contact') }}
                     </div>
@@ -64,6 +64,5 @@
                 <a href="{{ route('admin.teachers.index') }}" class="btn btn-danger">Back</a>
             </div>
         </div>
-    </form>
-    
+    </form>    
 @endsection

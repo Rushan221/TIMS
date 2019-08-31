@@ -11,11 +11,11 @@ class Teacher extends Model
 
     public function departments()
     {
-        return $this->belongsTo('App\Models\Department', 'department_id', 'id');
+        return $this->belongsTo('App\Department', 'department_id', 'id');
     }
 
     public function subjects()
     {
-        return $this->belongsTo('App\Models\Subject', 'subject_id', 'id');
+        return $this->belongsTo('App\Subject', 'subject_id', 'id');
     }
 }
