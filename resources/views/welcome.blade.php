@@ -52,7 +52,9 @@
                                 </li>
                             @endif
                         @else
-                            
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('/home') }}">Dashboard</a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -74,13 +76,8 @@
                     </ul>
                 </div>
             </div>
-        </nav>
-
-        
-      
-      
-        <div class="content">
-                
+        </nav> 
+        <div class="content">                
             <main class="py-4 container">
                 <div class="jumbotron">
                     <h1 class="display-3">TIMS</h1>
