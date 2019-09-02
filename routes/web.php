@@ -15,16 +15,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//CRUD and admin routes
 Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'as' => 'admin.'], function () {
     Route::resource('departments', 'DepartmentController');
     Route::resource('subjects', 'SubjectController');
     Route::resource('teachers', 'TeacherController');
     Route::get('home', 'HomeController@index')->name('home');
-
 });
 
 Route::post('/addUser/{id}','AdminController@addAsUser')->name('addAsUser');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');

@@ -18,6 +18,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}" media="screen">
+    <link rel="stylesheet" href="{{ asset('css/custom.min.css') }}">
 
     {{-- icons --}}
     <script src="https://kit.fontawesome.com/51b78c2475.js"></script>
@@ -25,6 +27,18 @@
 
     <style>
         /* The side navigation menu */
+        body {
+        padding-top: 55px;
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #888;
+        text-align: left;
+        background-color: #fff;
+        }
+        
         .sidebar {
         margin: 0;
         padding: 0;
@@ -60,7 +74,7 @@
         div.content {
         margin-left: 200px;
         padding: 1px 16px;
-        height: 1000px;
+        height: 100%;
         }
 
         /* On screens that are less than 700px wide, make the sidebar into a topbar */
@@ -79,9 +93,10 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top">
-                <a class="navbar-brand" href="{{ url('/') }}">TIMS</a>
+        <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
             <div class="container">
+
+                <a class="navbar-brand" href="{{ url('/') }}">TIMS</a>
                 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -132,7 +147,7 @@
 
         <!-- The sidebar -->
         <div class="sidebar">                      
-            <a class="active" href="{{ url('/home') }}">Dashboard</a>
+            <a href="{{ url('admin/home') }}">Dashboard</a>
             <a href="{{ route('admin.departments.index') }}">Departments</a>
             <a href="{{ route('admin.subjects.index') }}">Subjects</a>
             <a href="{{ route('admin.teachers.index') }}">Teachers</a>
