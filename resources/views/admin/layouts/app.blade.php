@@ -26,77 +26,18 @@
 
 
     <style>
-        /* The side navigation menu */
-        body {
-        padding-top: 55px;
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-        font-size: 1rem;
-        font-weight: 400;
-        line-height: 1.5;
-        color: #888;
-        text-align: left;
-        background-color: #fff;
-        }
         
-        .sidebar {
-        margin: 0;
-        padding: 0;
-        width: 200px;
-        background-color: #f1f1f1;
-        position: fixed;
-        z-index: 1;
-        height: 100%;
-        overflow: auto;
-        }
-
-        /* Sidebar links */
-        .sidebar a {
-        display: block;
-        color: black;
-        padding: 16px;
-        text-decoration: none;
-        }
-
-        /* Active/current link */
-        .sidebar a.active {
-        background-color: #367698;
-        color: white;
-        }
-
-        /* Links on mouse-over */
-        .sidebar a:hover:not(.active) {
-        background-color: #555;
-        color: white;
-        }
-
-        /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
-        div.content {
-        margin-left: 200px;
-        padding: 1px 16px;
-        height: 100%;
-        }
-
-        /* On screens that are less than 700px wide, make the sidebar into a topbar */
-        @media screen and (max-width: 800px) {
-        .sidebar {
-            width: 100%;
-            height: auto;
-            position: relative;
-        }
-        .sidebar a {float: left;}
-        div.content {margin-left: 0;}
-        }
+        
 
     </style>
 
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+        <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
             <div class="container">
-
-                <a class="navbar-brand" href="{{ url('/') }}">TIMS</a>
+                <i class="fas fa-university"></i>
+                <a class="navbar-brand mb-0 h1" href="{{ url('/') }}">TIMS</a>
                 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -105,7 +46,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        
+                       @include('admin.layouts.menu') 
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -143,16 +84,7 @@
                     </ul>
                 </div>
             </div>
-        </nav>
-
-        <!-- The sidebar -->
-        <div class="sidebar">                      
-            <a href="{{ url('admin/home') }}">Dashboard</a>
-            <a href="{{ route('admin.departments.index') }}">Departments</a>
-            <a href="{{ route('admin.subjects.index') }}">Subjects</a>
-            <a href="{{ route('admin.teachers.index') }}">Teachers</a>
-        </div>
-      
+        </nav>      
       
         <div class="content">            
             <main class="py-4 container">

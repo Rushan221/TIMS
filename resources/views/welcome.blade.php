@@ -26,8 +26,9 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
         <div class="container">
+            <i class="fas fa-university"></i>
             <a href="{{ url('/') }}" class="navbar-brand">TIMS</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
@@ -48,7 +49,7 @@
                         @endif
                     @else
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/home') }}">Dashboard</a>
+                            <a class="nav-link" href="{{ url('admin/home') }}">Dashboard</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -75,7 +76,7 @@
 
     <div class="container">
         <div class="jumbotron">
-            <h1 class="display-3 text-center">TIMS <i class="fas fa-university"></i></h1>
+            <h1 class="display-3 text-center"><i class="fas fa-university"></i> TIMS </h1>
             <p class="lead text-center font-weight-bold">Welcome to Teacher Information Management System</p>
             <hr class="my-4">
             <p class="lead text-center">
