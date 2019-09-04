@@ -1,104 +1,78 @@
+
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+  <title>TIMS | Dashboard</title>
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>    
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/custom.css') }}" media="screen">
-    <link rel="stylesheet" href="{{ asset('css/custom.min.css') }}">
-
-    {{-- icons --}}
-    <script src="https://kit.fontawesome.com/51b78c2475.js"></script>
-
-
-    <style>
-        
-        
-
-    </style>
+  <link rel="stylesheet" href="/css/app.css">
+  {{-- icons --}}
+  <script src="https://kit.fontawesome.com/51b78c2475.js"></script> 
 
 </head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
-            <div class="container">
-                <i class="fas fa-university"></i>
-                <a class="navbar-brand mb-0 h1" href="{{ url('/') }}">TIMS</a>
-                
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+  <!-- Header -->
+  @include('admin.layouts.header')
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-                       @include('admin.layouts.menu') 
-                    </ul>
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="/" class="brand-link">
+      <img src="{{ asset('/img/logo.jpg') }}"
+        alt="AdminLTE Logo"
+        class="brand-image img-square elevation-3"
+        style="opacity: .8">      
+      <span class="brand-text font-weight-light">TIMS</span>
+    </a>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>      
-      
-        <div class="content">            
-            <main class="py-4 container">
-                @include('admin.partials.alerts')
-                @yield('content')
-            </main>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="{{ asset('/img/user.png') }}" class="img-circle elevation-2" alt="User Image">
         </div>
+        <div class="info">
+          <a href="#" class="d-block">Welcome! {{ Auth::user()->name }}</a>
+        </div>
+      </div>
+      <!-- Sidebar Menu -->
+      @include('admin.layouts.menu')
+      <!-- /.sidebar-menu -->
     </div>
+    <!-- /.sidebar -->
+  </aside>
 
-    <script>
-        $(document).ready(function(){
-            $('#alert-message').delay(3000).fadeOut('slow');
-        });
-    </script>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+   
 
+    <!-- Main content -->
+    <div class="content mt-4">
+      <div class="container-fluid">
+          @include('admin.partials.alerts')
+          @yield('content')        
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  @include('admin.layouts.footer')
+</div>
+<!-- ./wrapper -->
+<script src="/js/app.js"></script>
+<script>
+  $(document).ready(function(){
+      $('#alert-message').delay(3000).fadeOut('slow');
+  });
+</script>
 </body>
 </html>
