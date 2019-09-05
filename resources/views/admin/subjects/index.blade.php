@@ -7,7 +7,7 @@
     </div>
     <div class="card-body">
         <div style="padding-bottom: 1em">
-            <a href="{{ route('admin.subjects.create') }}" class="btn btn-success" title="Add"><i class="fa fa-plus"></i></a>
+            <a href="{{ route('admin.subjects.create') }}" class="btn btn-success btn-sm" title="Add"><i class="fa fa-plus"></i></a>
         </div>
         <table class="table table-striped">
             <thead>

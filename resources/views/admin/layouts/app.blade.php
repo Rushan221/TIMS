@@ -28,22 +28,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <a href="/" class="brand-link">
       <img src="{{ asset('/img/logo.jpg') }}"
         alt="AdminLTE Logo"
-        class="brand-image img-square elevation-3"
+        class="brand-image img-circle elevation-3"
         style="opacity: .8">      
       <span class="brand-text font-weight-light">TIMS</span>
     </a>
 
     <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="{{ asset('/img/user.png') }}" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block">Welcome! {{ Auth::user()->name }}</a>
-        </div>
-      </div>
+    <div class="sidebar">      
       <!-- Sidebar Menu -->
       @include('admin.layouts.menu')
       <!-- /.sidebar-menu -->

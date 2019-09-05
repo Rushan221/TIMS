@@ -20,6 +20,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}" media="screen">
     <link rel="stylesheet" href="{{ asset('css/custom.min.css') }}">
+
+    {{-- icons --}}
+    <script src="https://kit.fontawesome.com/51b78c2475.js"></script>
 </head>
 <body>
     <div id="app">
