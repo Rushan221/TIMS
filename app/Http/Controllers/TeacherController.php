@@ -52,7 +52,7 @@ class TeacherController extends Controller
             'department_id' => 'required',
             'subject_id' => 'required',
         ];
-
+        dd($request);
         $request->validate($rules);
         $teacherCode = 'T-' . (strtolower(str_random(5)));
         $teacher = Teacher::create([
